@@ -1994,7 +1994,7 @@ locations.comp <- function(XY,
   
   if(nrow(unique(XY)) > 2) { ### if more than 2 uniques occurrences
     
-  ##############################  EOO estimation ##############################      
+    ##############################  EOO estimation ##############################      
     
     EOO_ <-
       EOO.computing(
@@ -2014,7 +2014,7 @@ locations.comp <- function(XY,
     p1 <- EOO_[[2]]
     EOO <- EOO_[[1]]
     
-  ################### AOO estimation #######################################################
+    ################### AOO estimation #######################################################
     
     AOO <- 
       .AOO.estimation(coordEAC, 
@@ -2300,6 +2300,7 @@ locations.comp <- function(XY,
           
           sp::plot(
             r2,
+            fill="lightblue",
             col = rgb(
               red = 1,
               green = 0,
@@ -2313,6 +2314,7 @@ locations.comp <- function(XY,
           
           sp::plot(
             r2,
+            fill="lightblue",
             col = rgb(
               red = 1,
               green = 0,
@@ -2329,6 +2331,7 @@ locations.comp <- function(XY,
       # r2_pol <- rasterToPolygons(r2, fun=NULL, n=4, na.rm=TRUE, digits=6, dissolve=FALSE)
       sp::plot(
         r2,
+        fill="lightblue",
         col = rgb(
           red = 1,
           green = 0,
@@ -2348,6 +2351,7 @@ locations.comp <- function(XY,
           # r2_PA_pol <- rasterToPolygons(r2_PA, fun=NULL, n=4, na.rm=TRUE, digits=6, dissolve=FALSE)
           sp::plot(r2_PA[[1]],
                    add = T,
+                   fill="lightblue",
                    col = rgb(
                      red = 0,
                      green = 0,
@@ -2361,13 +2365,13 @@ locations.comp <- function(XY,
     if (!is.null(p1) &
         draw.poly.EOO)
       sp::plot(p1,
-           add = T,
-           col = rgb(
-             red = 0.2,
-             green = 0.2,
-             blue = 0.2,
-             alpha = 0.1
-           ))
+               add = T,
+               col = rgb(
+                 red = 0.2,
+                 green = 0.2,
+                 blue = 0.2,
+                 alpha = 0.1
+               ))
     
     sp::plot(
       poly_borders,
@@ -2465,7 +2469,7 @@ locations.comp <- function(XY,
                         paste("Number of unique occurrences=", Results["Nbe_unique_occ.",1]),
                         paste("Number of sub-populations (radius",Resol_sub_pop,"km)=", Results["Nbe_subPop",1]),
                         paste("Number of locations (grid res.:",round(Resolution/1000,1)," km)","=", Results["Nbe_loc",1]),
-                        paste("IUCN category according to criterion B:", Results["Category_CriteriaB",1])), cex=3.5, bg = grDevices::grey(0.9))
+                        paste("Potential IUCN category based on criterion B:", Results["Category_CriteriaB",1])), cex=3.5, bg = grDevices::grey(0.9))
       }
       if(!is.null(protec.areas)){
         legend(1,10,  c(paste("EOO=", ifelse(!is.na(Results["EOO",1]), round(as.numeric(Results["EOO",1]),1), NA),"km2"),
@@ -2473,9 +2477,9 @@ locations.comp <- function(XY,
                         paste("Number of unique occurrences=", Results["Nbe_unique_occ.",1]),
                         paste("Number of sub-populations (radius",Resol_sub_pop,"km)=",Results["Nbe_subPop",1]),
                         paste("Number of locations (grid res.:",round(Resolution/1000,1)," km)","=", Results["Nbe_loc",1]),
-                        paste("Number of occupied protected areas=", Results["Nbe_loc_PA",1]),
-                        paste("IUCN category according to criterion B:", Results["Category_CriteriaB",1]),
-                        paste("Proportion of occurences within protected areas"), Results["Ratio_occ_within_PA",1]), cex=3.5, bg = grDevices::grey(0.9))
+                        paste("Number of occupied sites in fire-affeted areas=", Results["Nbe_loc_PA",1]),
+                        paste("Potential IUCN category based on criterion B:", Results["Category_CriteriaB",1]),
+                        paste("Proportion of occurrences within fire-affected area"), Results["Ratio_occ_within_PA",1]), cex=3.5, bg = grDevices::grey(0.9))
       }
       graphics::par(mar=c(4,1,1,1))
       sp::plot(full_poly_borders, lty=1, lwd=1,axes=FALSE)
@@ -2637,7 +2641,7 @@ locations.comp <- function(XY,
     names(OUTPUT) <- c("Results", "spatialPoly_EOO")
     
   }
-
+  
   return(OUTPUT)
 }
 
